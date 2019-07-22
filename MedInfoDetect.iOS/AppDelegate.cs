@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Tesseract;
+using Tesseract.iOS;
 using UIKit;
 
 namespace MedInfoDetect.iOS
@@ -24,7 +26,7 @@ namespace MedInfoDetect.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-
+            ITesseractApi api = new TesseractApi();
             return base.FinishedLaunching(app, options);
         }
     }

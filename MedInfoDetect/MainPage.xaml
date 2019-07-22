@@ -8,10 +8,11 @@
 
     <StackLayout>
         <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-        <Button x:Name="openCamera" Text="Take a picture" Clicked="OpenCamera_Clicked" />
+        
+        
+        <Image x:Name="photo"  Aspect="AspectFill" />
+        
+        <Button x:Name="CameraButton" Text="Take a picture" Clicked="CameraButton_Clicked" />
     </StackLayout>
 
 </ContentPage>

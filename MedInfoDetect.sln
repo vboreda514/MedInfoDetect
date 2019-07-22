@@ -7,7 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedInfoDetect.Android", "Me
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedInfoDetect.iOS", "MedInfoDetect.iOS\MedInfoDetect.iOS.csproj", "{F2C31644-92F1-46CF-B83C-5E447AEF0884}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedInfoDetect", "MedInfoDetect\MedInfoDetect.csproj", "{DD649A90-F113-4CB6-B784-D52D74821CA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedInfoDetect", "MedInfoDetect\MedInfoDetect.csproj", "{DD649A90-F113-4CB6-B784-D52D74821CA0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{67E3FEDA-D431-4AAC-A8F9-1B8DB8F92976}"
+	ProjectSection(SolutionItems) = preProject
+		MainApplication.cs = MainApplication.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
