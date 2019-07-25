@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Tesseract;
 
 
 
@@ -18,9 +19,12 @@ namespace MedInfoDetect
    
     public partial class MainPage : ContentPage
     {
+        private readonly ITesseractApi api;
         public MainPage()
         {
+             
             InitializeComponent();
+
             CameraButton.Clicked += async (sender, args) =>
             {
                 
@@ -34,14 +38,24 @@ namespace MedInfoDetect
 
                 if (file == null)
                     return;
+                System.IO.Stream photoStream = file.GetStream();
                 
-                photo.Source = ImageSource.FromStream(() =>
-                {
-                    var stream = file.GetStream();
+                //photo.Source = ImageSource.FromStream(() =>
+               // {
+               //     var stream = file.GetStream();
                     //file.Dispose();
-                    return stream;
-                });
-                
+               //     return stream;
+               // });
+                bool initialised = await api.Init("eng");
+                bool success = await api.SetImage(photoStream);
+                if (success)
+                {
+                    //List<Result> words = api.Results(PageIteratorLevel.Word);
+                    //List<Result> symbols = api.Results(PageIteratorLevel.Symbol);
+                    //List<Result> blocks = api.Results(PageIteratorLevel.Block);
+                    List<Result> results = (List<Result>)api.Results(PageIteratorLevel.Paragraph);
+                    //List<Result> lines = api.Results(PageIteratorLevel.Textline);
+                }
             };
             
         }
