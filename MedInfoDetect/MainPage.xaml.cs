@@ -39,14 +39,15 @@ namespace MedInfoDetect
                 if (file == null)
                     return;
                 System.IO.Stream photoStream = file.GetStream();
-                
+
                 //photo.Source = ImageSource.FromStream(() =>
-               // {
-               //     var stream = file.GetStream();
-                    //file.Dispose();
-               //     return stream;
-               // });
-                bool initialised = await api.Init("eng");
+                // {
+                //     var stream = file.GetStream();
+                //file.Dispose();
+                //     return stream;
+                // });
+                NameLabel.Text = "test";
+                bool initialised = await api.Init("eng+spa+deu+fra+ita");
                 bool success = await api.SetImage(photoStream);
                 if (success)
                 {
@@ -54,7 +55,18 @@ namespace MedInfoDetect
                     //List<Result> symbols = api.Results(PageIteratorLevel.Symbol);
                     //List<Result> blocks = api.Results(PageIteratorLevel.Block);
                     List<Result> results = (List<Result>)api.Results(PageIteratorLevel.Paragraph);
+                    var res = " ";
+                    foreach(Result r in results)
+                    {
+                        res += r.Text;
+                        Console.WriteLine(r.Text);
+                    }
+                    NameLabel.Text = res;
                     //List<Result> lines = api.Results(PageIteratorLevel.Textline);
+                }
+                else
+                {
+                    Console.WriteLine("Image Recognition Failed.");
                 }
             };
             

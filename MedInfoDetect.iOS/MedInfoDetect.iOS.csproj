@@ -68,6 +68,9 @@
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
+    <Compile Include="Page1.xaml.cs">
+      <DependentUpon>Page1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <BundleResource Include="Resources\tessdata\deu.traineddata" />
     <BundleResource Include="Resources\tessdata\eng.traineddata" />
@@ -144,5 +147,10 @@
       <Project>{8CA8B64B-7411-46D0-A23E-EEC1D15B6DD6}</Project>
       <Name>MedInfoDetect</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page1.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

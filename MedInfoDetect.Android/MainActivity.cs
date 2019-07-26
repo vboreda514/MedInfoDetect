@@ -24,14 +24,16 @@ namespace MedInfoDetect.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
 
-            Context context = Android.App.Application.Context;
-            AssetsDeployment assetsDeployment = default;
-            ITesseractApi api = new TesseractApi(context,assetsDeployment);
+            
             base.OnCreate(savedInstanceState);
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+            Context context = Android.App.Application.Context;
+            AssetsDeployment assetsDeployment = default;
+            ITesseractApi api = new TesseractApi(context,assetsDeployment);
+
             
 
         }
