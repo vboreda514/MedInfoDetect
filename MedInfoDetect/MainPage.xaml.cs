@@ -19,7 +19,7 @@ namespace MedInfoDetect
    
     public partial class MainPage : ContentPage
     {
-        private readonly ITesseractApi api;
+        private readonly ITesseractApi api = DependencyService.Get<ITesseractApi>();
         public MainPage()
         {
              
@@ -67,6 +67,7 @@ namespace MedInfoDetect
                 else
                 {
                     Console.WriteLine("Image Recognition Failed.");
+                    NameLabel.Text = "Image Recognition Failed";
                 }
             };
             

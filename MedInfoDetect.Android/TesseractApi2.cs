@@ -7,10 +7,13 @@ using Android.Graphics;
 using Android.Util;
 using Com.Googlecode.Tesseract.Android;
 using Java.Lang;
+using Tesseract.Droid;
+using Xamarin.Forms;
 using Exception = System.Exception;
 using File = Java.IO.File;
 using Object = Java.Lang.Object;
 
+[assembly: Dependency(typeof(TesseractApi2))]
 namespace Tesseract.Droid
 {
     public class TesseractApi2 : ITesseractApi

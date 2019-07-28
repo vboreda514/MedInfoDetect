@@ -26,7 +26,7 @@ namespace MedInfoDetect.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-            ITesseractApi api = new TesseractApi();
+            ITesseractApi api = new TesseractApi2();
             return base.FinishedLaunching(app, options);
         }
     }

@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 using CoreGraphics;
 using Foundation;
 using Tesseract.Binding.iOS;
+using Tesseract.iOS;
 using UIKit;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(TesseractApi2))]
 namespace Tesseract.iOS
 {
     public class TesseractApi2 : ITesseractApi
