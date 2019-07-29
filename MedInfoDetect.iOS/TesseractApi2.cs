@@ -30,7 +30,7 @@ namespace Tesseract.iOS
                 OnProgress(e.Progress);
             };
         }
-
+        
         public int ProgressValue
         {
             get

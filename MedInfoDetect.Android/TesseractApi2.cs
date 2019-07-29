@@ -37,6 +37,18 @@ namespace Tesseract.Droid
 
         public TesseractApi2(Context context, AssetsDeployment assetsDeployment)
         {
+            
+            _assetsDeployment = assetsDeployment;
+            _context = context;
+            _progressHandler.Progress += (sender, e) => {
+                OnProgress(e.Progress);
+            };
+            _api = new TessBaseAPI(_progressHandler);
+        }
+        public TesseractApi2()
+        {
+            Context context = Android.App.Application.Context;
+            AssetsDeployment assetsDeployment = default;
             _assetsDeployment = assetsDeployment;
             _context = context;
             _progressHandler.Progress += (sender, e) => {
