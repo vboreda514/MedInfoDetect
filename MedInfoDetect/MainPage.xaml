@@ -10,11 +10,12 @@
         <!-- Place new controls here -->
         
         
-        <Image x:Name="photo"  Aspect="AspectFill" />
+        
         <Label x:Name="NameLabel" Text="Enter Name Here"/>
         <Label x:Name="SexLabel" Text="Enter Sex Here(M or F)"/>
         <Label x:Name="MRLabel" Text="Enter MR# Here"/>
         <Button x:Name="CameraButton" Text="Take a picture" Clicked="CameraButton_Clicked" />
+        <Image x:Name="photo"  Aspect="AspectFill" />
     </StackLayout>
 
 </ContentPage>

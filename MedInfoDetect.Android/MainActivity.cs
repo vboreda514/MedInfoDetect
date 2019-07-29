@@ -32,7 +32,7 @@ namespace MedInfoDetect.Droid
             LoadApplication(new App());
             Context context = Android.App.Application.Context;
             AssetsDeployment assetsDeployment = default;
-            ITesseractApi api = new TesseractApi(context,assetsDeployment);
+            ITesseractApi api = new TesseractApi2(context,assetsDeployment);
 
             
 
