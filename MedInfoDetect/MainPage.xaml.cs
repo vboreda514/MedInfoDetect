@@ -76,9 +76,9 @@ namespace MedInfoDetect
                     var conf = " ";
                     foreach(Result r in results)
                     {
-                        if (r.Confidence > 75f)
+                        if (r.Confidence > 80f)
                         {
-                            res += r.Text;
+                            res += r.Text.ToUpper();
                             conf += r.Confidence.ToString() + " ";
                         }
                         
