@@ -57,27 +57,34 @@ namespace MedInfoDetect
                 //     return stream;
                 // });
 
-                NameLabel.Text = "1";
+                NameEntry.Text  = "1";
                 //photo.Source = ImageSource.FromStream(file.GetStream);
                 bool initialised = await api.Init("eng");
-                NameLabel.Text = NameLabel.Text + "2";
+                NameEntry.Text = NameEntry.Text + "2";
+                api.SetWhitelist("0123456789:-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
                 bool success = await api.SetImage(photoStream);
-                NameLabel.Text = NameLabel.Text + "3";
+                NameEntry.Text = NameEntry.Text + "3";
                 if (success)
                 {
                     //List<Result> lines = api.Results(PageIteratorLevel.Textline);
                     //List<Result> words = api.Results(PageIteratorLevel.Word);
-                    //List<Result> symbols = api.Results(PageIteratorLevel.Symbol);
+                    List<Result> results = api.Results(PageIteratorLevel.Symbol).ToList();
                     //List<Result> blocks = api.Results(PageIteratorLevel.Block);
 
-                    List<Result> results = api.Results(PageIteratorLevel.Paragraph).ToList();
+                    //List<Result> results = api.Results(PageIteratorLevel.Paragraph).ToList();
                     var res = " ";
+                    var conf = " ";
                     foreach(Result r in results)
                     {
-                        res += r.Text;
-                       
+                        if (r.Confidence > 75f)
+                        {
+                            res += r.Text;
+                            conf += r.Confidence.ToString() + " ";
+                        }
+                        
                     }
-                    SexLabel.Text = api.Text;
+                    SexEntry.Text = api.Text;
+                    MREntry.Text = conf;
                     //SexLabel.Text = res;
 
                     
@@ -85,7 +92,7 @@ namespace MedInfoDetect
                 else
                 {
                     
-                    NameLabel.Text = "Image Recognition Failed";
+                    NameEntry.Text = "Image Recognition Failed";
                 }
                 
             };
