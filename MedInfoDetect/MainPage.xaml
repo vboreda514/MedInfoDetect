@@ -11,9 +11,9 @@
         
         
         
-        <Label x:Name="NameLabel" Text="Enter Name Here"/>
-        <Label x:Name="SexLabel" Text="Enter Sex Here(M or F)"/>
-        <Label x:Name="MRLabel" Text="Enter MR# Here"/>
+        <Entry x:Name="NameEntry" Placeholder="Enter Name Here"/>
+        <Entry x:Name="SexEntry" Placeholder="Enter Sex Here(M/F)"/>
+        <Entry x:Name="MREntry" Placeholder="Enter MR# Here"/>
         <Button x:Name="CameraButton" Text="Take a picture" Clicked="CameraButton_Clicked" />
         <Image x:Name="photo"  Aspect="AspectFill" />
     </StackLayout>
