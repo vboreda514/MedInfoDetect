@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Tesseract;
 using System.Diagnostics;
-
+using System.Drawing;
+using System.IO;
 
 namespace MedInfoDetect
 {
@@ -25,15 +26,7 @@ namespace MedInfoDetect
         {
             
             InitializeComponent();
-            switch (Device.RuntimePlatform)
-            {
-                case Device.iOS:
-                     api = DependencyService.Get<ITesseractApi>();
-                    break;
-                case Device.Android:
-                     api = DependencyService.Get<ITesseractApi>();
-                    break;
-            }
+            api = DependencyService.Get<ITesseractApi>();
 
             CameraButton.Clicked += async (sender, args) =>
             {
@@ -49,7 +42,7 @@ namespace MedInfoDetect
                 if (file == null)
                     return;
                 System.IO.Stream photoStream = file.GetStream();
-
+                
                 //photo.Source = ImageSource.FromStream(() =>
                 // {
                 //     var stream = file.GetStream();
@@ -58,12 +51,15 @@ namespace MedInfoDetect
                 // });
 
                 NameEntry.Text  = "1";
-                //photo.Source = ImageSource.FromStream(file.GetStream);
+                Photo.Source = ImageSource.FromStream(file.GetStream); //debug code
+                Bitmap bitmap = new Bitmap(photoStream);
+                Stream stream2 = RaiseContrast(bitmap);
+                Photo.Source = ImageSource.FromStream(() => stream2);
                 bool initialised = await api.Init("eng");
-                NameEntry.Text = NameEntry.Text + "2";
-                api.SetWhitelist("0123456789:-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
-                bool success = await api.SetImage(photoStream);
-                NameEntry.Text = NameEntry.Text + "3";
+                NameEntry.Text += "2";
+                api.SetWhitelist("0123456789:-,#'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+                bool success = await api.SetImage(stream2);
+                NameEntry.Text += "3";                                                    
                 if (success)
                 {
                     //List<Result> lines = api.Results(PageIteratorLevel.Textline);
@@ -71,12 +67,12 @@ namespace MedInfoDetect
                     List<Result> results = api.Results(PageIteratorLevel.Symbol).ToList();
                     //List<Result> blocks = api.Results(PageIteratorLevel.Block);
 
-                    //List<Result> results = api.Results(PageIteratorLevel.Paragraph).ToList();
+                    //List<Result> results = api.Res    ults(PageIteratorLevel.Paragraph).ToList();
                     var res = " ";
                     var conf = " ";
                     foreach(Result r in results)
                     {
-                        if (r.Confidence > 80f)
+                        if (r.Confidence > 85f)
                         {
                             res += r.Text.ToUpper();
                             conf += r.Confidence.ToString() + " ";
@@ -99,11 +95,60 @@ namespace MedInfoDetect
             
         }
 
+        public MemoryStream RaiseContrast(Bitmap bitmap1)
+        {
+            LockBitmap bitmap = new LockBitmap(bitmap1);
+            bitmap.LockBits();
+            var raisedby = 30.0;      //change this
+            var contrast = Math.Pow((100.0 + raisedby) / 100.0, 2);
+
+            for(int x = 0; x < bitmap.Width; x++)
+            {
+                for(int y = 0; y < bitmap.Height; y++)
+                {
+                    System.Drawing.Color prev = bitmap.GetPixel(x, y);
+                    var red = ((((prev.R / 255.0) - 0.5) * contrast) + 0.5) * 255.0;
+                    var green = ((((prev.G / 255.0) - 0.5) * contrast) + 0.5) * 255.0;
+                    var blue = ((((prev.B / 255.0) - 0.5) * contrast) + 0.5) * 255.0;
+                    if (red > 255)
+                        red = 255.0;
+                    else if (red < 0)
+                        red = 0.0;
+                    if (green > 255)
+                        green = 255.0;
+                    else if (green < 0)
+                        green = 0.0;
+                    if (blue > 255)
+                        blue = 255.0;
+                    else if (blue < 0)
+                        blue = 0.0;
+
+                    bitmap.SetPixel(x, y, System.Drawing.Color.FromArgb(prev.A, (int)red, (int)green, (int)blue));  
+                }
+            }
+            bitmap.UnlockBits();
+            MemoryStream m = new MemoryStream();
+            m.Write(bitmap.Pixels, 0, bitmap.Pixels.Length);
+            return m;
+        }
 
 
         private void CameraButton_Clicked(object sender, EventArgs e)
         {
          
-        } 
+        }
+
+        private void SubmitButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ContrastButton_Clicked(object sender, EventArgs e)
+        {
+            if(Photo.Source == null)
+            {
+                //display message
+            }
+        }
     }
 }

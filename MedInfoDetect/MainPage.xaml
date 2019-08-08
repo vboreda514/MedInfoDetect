@@ -8,14 +8,16 @@
 
     <StackLayout>
         <!-- Place new controls here -->
-        
-        
-        
+
+
+        <Button x:Name="CameraButton" Text="Take a picture" Clicked="CameraButton_Clicked" />
         <Entry x:Name="NameEntry" Placeholder="Enter Name Here"/>
         <Entry x:Name="SexEntry" Placeholder="Enter Sex Here(M/F)"/>
         <Entry x:Name="MREntry" Placeholder="Enter MR# Here"/>
-        <Button x:Name="CameraButton" Text="Take a picture" Clicked="CameraButton_Clicked" />
-        <Image x:Name="photo"  Aspect="AspectFill" />
+        <Image x:Name="Photo"  Aspect="AspectFill" />
+   
+        
+        <Button x:Name="SubmitButton" Text="Submit Information" Clicked="SubmitButton_Clicked"/>
     </StackLayout>
 
 </ContentPage>
