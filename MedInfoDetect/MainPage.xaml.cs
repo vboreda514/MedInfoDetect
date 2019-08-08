@@ -52,7 +52,7 @@ namespace MedInfoDetect
 
                 NameEntry.Text  = "1";
                 Photo.Source = ImageSource.FromStream(file.GetStream); //debug code
-                Bitmap bitmap = new Bitmap(photoStream);
+                System.Drawing.Bitmap bitmap = new Bitmap(photoStream);
                 Stream stream2 = RaiseContrast(bitmap);
                 Photo.Source = ImageSource.FromStream(() => stream2);
                 bool initialised = await api.Init("eng");
@@ -95,7 +95,7 @@ namespace MedInfoDetect
             
         }
 
-        public MemoryStream RaiseContrast(Bitmap bitmap1)
+        public MemoryStream RaiseContrast(System.Drawing.Bitmap bitmap1)
         {
             LockBitmap bitmap = new LockBitmap(bitmap1);
             bitmap.LockBits();
