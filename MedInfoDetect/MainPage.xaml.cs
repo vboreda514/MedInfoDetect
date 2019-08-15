@@ -190,8 +190,8 @@ namespace MedInfoDetect
 
                 }
                 res = res.Replace(":", "");
-                SexEntry.Text = res;
-                MREntry.Text = conf;
+                //SexEntry.Text = res;
+                //MREntry.Text = conf;
                 if (res.Contains("PR"))
                 {
                     var sindex = res.LastIndexOf("PR") - 1;
