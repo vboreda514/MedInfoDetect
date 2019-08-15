@@ -233,12 +233,6 @@ namespace MedInfoDetect
             TestLabel.Text = name + " " + sex + " " + mr;
         }
 
-        private void ContrastButton_Clicked(object sender, EventArgs e)
-        {
-            if(Photo.Source == null)
-            {
-                //display message
-            }
-        }
+        
     }
 }
