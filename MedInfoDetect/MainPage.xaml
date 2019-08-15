@@ -15,8 +15,9 @@
         <Entry x:Name="SexEntry" Placeholder="Enter Sex Here(M/F)"/>
         <Entry x:Name="MREntry" Placeholder="Enter MR# Here"/>
         <Image x:Name="Photo"  Aspect="AspectFill" />
-   
-        
+        <Label x:Name="TestLabel" />
+
+
         <Button x:Name="SubmitButton" Text="Submit Information" Clicked="SubmitButton_Clicked"/>
     </StackLayout>
 
