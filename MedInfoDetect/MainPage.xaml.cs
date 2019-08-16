@@ -189,18 +189,25 @@ namespace MedInfoDetect
                     }
 
                 }
+                TestLabel.Text = res;
                 res = res.Replace(":", "");
+                
                 //SexEntry.Text = res;
                 //MREntry.Text = conf;
-                if (res.Contains("PR"))
+                if (res.Contains("SEX"))
                 {
-                    var sindex = res.LastIndexOf("PR") - 1;
-                    SexEntry.Text = res.Substring(sindex, 1);
+                    var sindex = res.LastIndexOf("SEX")+2;
+                    SexEntry.Text = res.Substring(sindex+1, 1);
                 }
                 if (res.Contains("PCP"))
                 {
                     var nindex = res.LastIndexOf("PCP");
-                    NameEntry.Text = res.Substring(0, nindex - 1);
+                    NameEntry.Text = res.Substring(0, nindex);
+                }
+                else if (res.Contains("'MR"))
+                {
+                    var nindex2 = res.LastIndexOf("'MR");
+                    NameEntry.Text = res.Substring(0, nindex2 - 1);
                 }
                 if (res.Contains("ACCT") & res.Contains("#")){
                     var mindex2 = res.LastIndexOf("ACCT");
@@ -209,7 +216,7 @@ namespace MedInfoDetect
                 }
                 if(!(res.Contains("PR") | res.Contains("PCP") | res.Contains("ACCT") | res.Contains("#")))
                 {
-                    await DisplayAlert("Could not detect text.", "Try again or enter info manually.", "OK");
+                    await DisplayAlert("Could not detect text.", "Try again or enter info manually.", "OK");    
                 }
             }
             else
